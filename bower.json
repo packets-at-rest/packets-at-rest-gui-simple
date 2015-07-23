@@ -1,0 +1,22 @@
+{
+  "name": "packets-at-rest-gui-simple",
+  "version": "0",
+  "authors": [
+    "shadowbq <shadowbq@gmial.com>"
+  ],
+  "license": "BSD",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.8.2",
+    "bootstrap": "~3.2.0",
+    "handlebars": "~3.0.0",
+    "parsleyjs": "~2.1.2"
+  }
+}
