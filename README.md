@@ -3,6 +3,8 @@
 Packets-At-REST-gui-simple is a simple example for building a HTML front-end
 for the Packets-at-REST system.
 
+![About](https://raw.githubusercontent.com/packets-at-rest/packets-at-rest-gui-simple/master/Screenshot.png) [1]
+
 ## Setup PAR
 
 Install packets-at-rest/packets-at-rest.
