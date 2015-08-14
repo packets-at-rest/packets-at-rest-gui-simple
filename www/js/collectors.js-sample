@@ -1,0 +1,1 @@
+var collectorData = [{name:"SILO", url:"https://10.0.0.1" }, {name:"DEEPSEA", url:"https://10.0.0.2" }];

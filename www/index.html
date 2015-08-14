@@ -39,336 +39,325 @@
 
 <body>
 
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-          <a style = "padding-left: 15px; padding-top: 7px;" class="navbar-brand" href="https://github.com/packets-at-rest">
-            <img alt="Brand" height="35" src="img/github.png">
-          </a>
-          <a class="navbar-brand" href="#">Packets-At-REST gui simple</a>
-        </div>
-    </div>
-</nav>
+  <nav class="navbar navbar-default navbar-inverse" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
+            <a style = "padding-left: 15px; padding-top: 7px;" class="navbar-brand" href="https://github.com/packets-at-rest">
+              <img alt="Brand" height="35" src="img/github.png">
+            </a>
+            <a class="navbar-brand" href="#">Packets-At-REST gui simple</a>
+          </div>
+      </div>
+  </nav>
 
-<div class="container">
+  <div class="container">
 
-<form role="form" method="get" action="data.pcap" data-parsley-validate>
+    <form role="form" method="get" id="par-form" data-parsley-validate>
 
-  <!-- <input id="input-timezone-offset" type="hidden" name="default-timezone-offset" value=""/> -->
+      <!-- <input id="input-timezone-offset" type="hidden" name="default-timezone-offset" value=""/> -->
 
-  <div class="row">
+      <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <label for="collector-selector">Collectors</label>
+            <select class="form-control" id="collector-selector" name="collector_id" tabindex="4" data-parsley-required ></select>
+          </div>
+
+          <div class="col-md-5">
+              <div class="input-group">
+              <label for="api-key">API Key:</label>
+              <input type="text" id="api-key"
+                        class="form-control"
+                        size=40
+                        name="api-key" tabindex="1"
+                        value="Enter API key .."
+                        data-parsley-trigger="change"
+                        data-parsley-minlength="36"
+                        data-parsley-maxlength="36"
+                        data-parsley-required />
+              </div>
+          </div>
+          <div class="col-md-1"></div>
+      </div>
+
+
+      <br/>
+      <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+
+            <ul class="nav nav-tabs" id="query-tabs">
+                <li class="active"><a href="#pcap-filter-tab"
+                                      query-type="pcap-filter"><img alt="Brand" height="35" src="img/box.png">Packet Filter</a>
+                </li>
+            </ul>
+            <div id="query-panel" class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="pcap-filter-tab">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="start_time">Start time:</label>
+
+                                    <div class="input-group">
+                                        <input id="start_time" type="text"
+                                               name="start_time"
+                                               class="form-control"
+                                               tabindex="2"
+                                               data-parsley-required />
+
+                                        <div class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown"><span
+                                                    class="caret"></span></button>
+                                            <ul class="dropdown-menu pull-right"
+                                                role="menu">
+                                                <li><a onclick="setStartTime(null, null)">Now</a></li>
+                                                <li><a onclick="setStartTime('minute', 1)">1 minute ago</a></li>
+                                                <li><a onclick="setStartTime('minute', 5)">5 minutes ago</a></li>
+                                                <li><a onclick="setStartTime('minute', 15)">15 minutes ago</a></li>
+                                                <li><a onclick="setStartTime('hour', 1)">1 hour ago</a></li>
+                                                <li><a onclick="setStartTime('hour', 12)">12 hours ago</a></li>
+                                                <li><a onclick="setStartTime('day', 1)">1 day ago</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                </div>
+                                <div class="col-md-6">
+                                    <!--
+                                    <label for="duration">Duration:</label>
+
+                                    <div class="input-group">
+                                        <input id="duration" type="text"
+                                               name="duration"
+                                               class="form-control"
+                                               tabindex="3" value="1m"/>
+
+                                        <div class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown"><span
+                                                    class="caret"></span></button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a onclick="setElementValue($('#duration'), '15s')">15 seconds</a></li>
+                                                <li><a onclick="setElementValue($('#duration'), '30s')">30 seconds</a></li>
+                                                <li><a onclick="setElementValue($('#duration'), '1m')">1 minute</a></li>
+                                                <li><a onclick="setElementValue($('#duration'), '5m')">5 minutes</a></li>
+                                                <li><a onclick="setElementValue($('#duration'), '15m')">15 minutes</a></li>
+                                                <li><a onclick="setElementValue($('#duration'), '1h')">1 hour</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                  -->
+                                  <label for="end_time">End time:</label>
+
+                                  <div class="input-group">
+                                      <input id="end_time" type="text"
+                                             name="end_time"
+                                             class="form-control"
+                                             tabindex="3"
+                                             data-parsley-required />
+
+                                      <div class="input-group-btn">
+                                          <button type="button"
+                                                  class="btn btn-default dropdown-toggle"
+                                                  data-toggle="dropdown"><span
+                                                  class="caret"></span></button>
+                                          <ul class="dropdown-menu pull-right"
+                                              role="menu">
+                                              <li><a onclick="setEndTime(null, null)">Now</a></li>
+                                              <li><a onclick="setEndTime('minute', 1)">1 minute ago</a></li>
+                                              <li><a onclick="setEndTime('minute', 5)">5 minutes ago</a></li>
+                                              <li><a onclick="setEndTime('minute', 15)">15 minutes ago</a></li>
+                                              <li><a onclick="setEndTime('hour', 1)">1 hour ago</a></li>
+                                              <li><a onclick="setEndTime('hour', 12)">12 hours ago</a></li>
+                                              <li><a onclick="setEndTime('day', 1)">1 day ago</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <br/>
+
+
+                                </div>
+                            </div>
+                            <!-- end row-->
+                            <br/>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label for="src_addr">Source IP:</label>
+
+                                    <div class="input-group">
+                                        <input id="src_addr" type="text"
+                                               name="src_addr"
+                                               class="form-control"
+                                               tabindex="4"
+                                               value=""
+                                               data-parsley-required  />
+                                    </div>
+                                </div><!-- //col src_addr -->
+
+                                <div class="col-md-6">
+                                    <label for="dst_addr">Destination IP:</label>
+
+                                    <div class="input-group">
+                                        <input id="dst_addr" type="text"
+                                               name="dst_addr"
+                                               class="form-control"
+                                               tabindex="5"
+                                               value=""
+                                               data-parsley-required/>
+                                    </div>
+                                </div><!-- //col dst_addr -->
+
+                            </div>
+
+                            <!-- end row-->
+                            <br/>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label for="src_port">Source Port:</label>
+
+                                    <div class="input-group">
+                                        <input id="src_port" type="text"
+                                               name="src_port"
+                                               class="form-control"
+                                               tabindex="6"
+                                               value=""
+                                               data-parsley-trigger="change"
+                                               data-parsley-type="integer"
+                                               data-parsley-required />
+
+                                        <div class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown"><span
+                                                    class="caret"></span></button>
+                                            <ul class="dropdown-menu pull-right"
+                                                role="menu">
+                                                <li><a onclick="setElementValue($('#src_port'), '80')">80 HTTP</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '443')">443 HTTPS</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '53')">53 DNS</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '21')">21 FTP Control</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '25')">25 SMTP</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '445')">445 AD/SMB</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '137')">137 NetBIOS</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '138')">138 NetBIOS</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '139')">139 NetBIOS</a></li>
+                                                <li><a onclick="setElementValue($('#src_port'), '1433')">1433 M$ SQL</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- //col src_port -->
+
+                                <div class="col-md-6">
+                                    <label for="dst_port">Destination Port:</label>
+
+                                    <div class="input-group">
+                                        <input id="dst_port" type="text"
+                                               name="dst_port"
+                                               class="form-control"
+                                               tabindex="7"
+                                               value=""
+                                               data-parsley-trigger="change"
+                                               data-parsley-type="integer"
+                                               data-parsley-required />
+
+                                        <div class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown"><span
+                                                    class="caret"></span></button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a onclick="setElementValue($('#dst_port'), '80')">80 HTTP</a> </li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '443')">443 HTTPS</a> </li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '53')">53 DNS</a></li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '21')">21 FTP Control</a> </li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '25')">25 SMTP</a> </li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '445')">445 AD/SMB</a></li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '137')">137 NetBIOS</a></li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '138')">138 NetBIOS</a></li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '139')">139 NetBIOS</a></li>
+                                                <li><a onclick="setElementValue($('#dst_port'), '1433')">1433 M$ SQL</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- //col src_port -->
+
+
+                            </div>
+                            <!-- end row-->
+
+
+
+                        </div>
+                      </div>
+                </div>
+            </div>
+      </div>
+      <div class="col-md-1"></div>
+      </div>
+
+      <br/>
+
+      <div class="row">
+
+          <div class="col-md-1"></div>
+
+          <div class="col-md-5">
+
+              <label for="sensor-selector">Sensor</label>
+              <select class="form-control" id="sensor-selector" name="node_id" tabindex="4" data-parsley-required ></select>
+
+          </div>
+          <div class="col-md-5">
+              <label>&nbsp;</label>
+              <button type="submit" class="btn btn-default btn-primary btn-block" tabindex="5">
+                  Download PCAP
+              </button>
+          </div>
+          <div class="col-md-1"></div>
+      </div>
+    </form>
+    </br>
+
+    <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-10">
-
-        <ul class="nav nav-tabs" id="query-tabs">
-            <li class="active"><a href="#pcap-filter-tab"
-                                  query-type="pcap-filter"><img alt="Brand" height="35" src="img/box.png">Packet Filter</a>
-            </li>
-        </ul>
-        <div id="query-panel" class="panel panel-default">
-            <div class="panel-body">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="pcap-filter-tab">
-                        <!--
-                        <div class="row">
-                            <div class="col-md-12">
-                                <textarea id="pcap-filter-input"
-                                          class="form-control"
-                                          name="filter" tabindex="1"
-                                          placeholder="PCAP filter..."></textarea>
-                            </div>
-                        </div>
-
-                        <br/>
-                        -->
-                        <!-- end row-->
-
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                <label for="api-key">API Key:</label>
-                                <input type="text" id="api-key"
-                                          class="form-control"
-                                          size=40
-                                          name="api-key" tabindex="1"
-                                          value="Enter API key .."
-                                          data-parsley-trigger="change"
-                                          data-parsley-minlength="36"
-                                          data-parsley-maxlength="36"
-                                          data-parsley-required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <br/>
-
-                        <!-- end row-->
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="start_time">Start time:</label>
-
-                                <div class="input-group">
-                                    <input id="start_time" type="text"
-                                           name="start_time"
-                                           class="form-control"
-                                           tabindex="2"
-                                           data-parsley-required />
-
-                                    <div class="input-group-btn">
-                                        <button type="button"
-                                                class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown"><span
-                                                class="caret"></span></button>
-                                        <ul class="dropdown-menu pull-right"
-                                            role="menu">
-                                            <li><a onclick="setStartTime(null, null)">Now</a></li>
-                                            <li><a onclick="setStartTime('minute', 1)">1 minute ago</a></li>
-                                            <li><a onclick="setStartTime('minute', 5)">5 minutes ago</a></li>
-                                            <li><a onclick="setStartTime('minute', 15)">15 minutes ago</a></li>
-                                            <li><a onclick="setStartTime('hour', 1)">1 hour ago</a></li>
-                                            <li><a onclick="setStartTime('hour', 12)">12 hours ago</a></li>
-                                            <li><a onclick="setStartTime('day', 1)">1 day ago</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <br/>
-                            </div>
-                            <div class="col-md-6">
-                                <!--
-                                <label for="duration">Duration:</label>
-
-                                <div class="input-group">
-                                    <input id="duration" type="text"
-                                           name="duration"
-                                           class="form-control"
-                                           tabindex="3" value="1m"/>
-
-                                    <div class="input-group-btn">
-                                        <button type="button"
-                                                class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown"><span
-                                                class="caret"></span></button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a onclick="setElementValue($('#duration'), '15s')">15 seconds</a></li>
-                                            <li><a onclick="setElementValue($('#duration'), '30s')">30 seconds</a></li>
-                                            <li><a onclick="setElementValue($('#duration'), '1m')">1 minute</a></li>
-                                            <li><a onclick="setElementValue($('#duration'), '5m')">5 minutes</a></li>
-                                            <li><a onclick="setElementValue($('#duration'), '15m')">15 minutes</a></li>
-                                            <li><a onclick="setElementValue($('#duration'), '1h')">1 hour</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                              -->
-                              <label for="end_time">End time:</label>
-
-                              <div class="input-group">
-                                  <input id="end_time" type="text"
-                                         name="end_time"
-                                         class="form-control"
-                                         tabindex="3"
-                                         data-parsley-required />
-
-                                  <div class="input-group-btn">
-                                      <button type="button"
-                                              class="btn btn-default dropdown-toggle"
-                                              data-toggle="dropdown"><span
-                                              class="caret"></span></button>
-                                      <ul class="dropdown-menu pull-right"
-                                          role="menu">
-                                          <li><a onclick="setEndTime(null, null)">Now</a></li>
-                                          <li><a onclick="setEndTime('minute', 1)">1 minute ago</a></li>
-                                          <li><a onclick="setEndTime('minute', 5)">5 minutes ago</a></li>
-                                          <li><a onclick="setEndTime('minute', 15)">15 minutes ago</a></li>
-                                          <li><a onclick="setEndTime('hour', 1)">1 hour ago</a></li>
-                                          <li><a onclick="setEndTime('hour', 12)">12 hours ago</a></li>
-                                          <li><a onclick="setEndTime('day', 1)">1 day ago</a></li>
-                                      </ul>
-                                  </div>
-                              </div>
-                              <br/>
-
-
-                            </div>
-                        </div>
-                        <!-- end row-->
-                        <br/>
-
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <label for="src_addr">Source IP:</label>
-
-                                <div class="input-group">
-                                    <input id="src_addr" type="text"
-                                           name="src_addr"
-                                           class="form-control"
-                                           tabindex="4"
-                                           value=""
-                                           data-parsley-required  />
-                                </div>
-                            </div><!-- //col src_addr -->
-
-                            <div class="col-md-6">
-                                <label for="dst_addr">Destination IP:</label>
-
-                                <div class="input-group">
-                                    <input id="dst_addr" type="text"
-                                           name="dst_addr"
-                                           class="form-control"
-                                           tabindex="5"
-                                           value=""
-                                           data-parsley-required/>
-                                </div>
-                            </div><!-- //col dst_addr -->
-
-                        </div>
-
-                        <!-- end row-->
-                        <br/>
-
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <label for="src_port">Source Port:</label>
-
-                                <div class="input-group">
-                                    <input id="src_port" type="text"
-                                           name="src_port"
-                                           class="form-control"
-                                           tabindex="6"
-                                           value=""
-                                           data-parsley-trigger="change"
-                                           data-parsley-type="integer"
-                                           data-parsley-required />
-
-                                    <div class="input-group-btn">
-                                        <button type="button"
-                                                class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown"><span
-                                                class="caret"></span></button>
-                                        <ul class="dropdown-menu pull-right"
-                                            role="menu">
-                                            <li><a onclick="setElementValue($('#src_port'), '80')">80 HTTP</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '443')">443 HTTPS</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '53')">53 DNS</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '21')">21 FTP Control</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '25')">25 SMTP</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '445')">445 AD/SMB</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '137')">137 NetBIOS</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '138')">138 NetBIOS</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '139')">139 NetBIOS</a></li>
-                                            <li><a onclick="setElementValue($('#src_port'), '1433')">1433 M$ SQL</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- //col src_port -->
-
-                            <div class="col-md-6">
-                                <label for="dst_port">Destination Port:</label>
-
-                                <div class="input-group">
-                                    <input id="dst_port" type="text"
-                                           name="dst_port"
-                                           class="form-control"
-                                           tabindex="7"
-                                           value=""
-                                           data-parsley-trigger="change"
-                                           data-parsley-type="integer"
-                                           data-parsley-required />
-
-                                    <div class="input-group-btn">
-                                        <button type="button"
-                                                class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown"><span
-                                                class="caret"></span></button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a onclick="setElementValue($('#dst_port'), '80')">80 HTTP</a> </li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '443')">443 HTTPS</a> </li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '53')">53 DNS</a></li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '21')">21 FTP Control</a> </li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '25')">25 SMTP</a> </li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '445')">445 AD/SMB</a></li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '137')">137 NetBIOS</a></li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '138')">138 NetBIOS</a></li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '139')">139 NetBIOS</a></li>
-                                            <li><a onclick="setElementValue($('#dst_port'), '1433')">1433 M$ SQL</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- //col src_port -->
-
-
-                        </div>
-                        <!-- end row-->
-
-
-
-                    </div>
-                  </div>
-            </div>
+        <div class="well">
+          Example:
+          <input type="button" value="serialize" id="serialize">
+          <pre id="example-out">http://127.0.0.1:9001/data.pcap?src_addr=1.1.1.1&src_port=111&dst_addr=2.2.2.2&dst_port=222&start_time=2001-01-01 5:01pm&end_time=2001-01-01 5:05pm&api_key=54ba2f56-3a84-4593-fe73-322e3b5ded16&node_id=1</pre>
         </div>
+      </div>
+      <div class="col-md-1"></div>
     </div>
-    <div class="col-md-1"></div>
-</div>
 
-<br/>
+    </br>
 
-<div class="row">
+    <footer class="bs-docs-footer">
+      <div class="container">
+        <div class="bs-docs-social">
+      <ul class="bs-docs-social-buttons">
+        <li>
+          <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=packets-at-rest&amp;repo=packets-at-rest&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+        </li>
+        <li>
+          <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=packets-at-rest&amp;repo=packets-at-rest&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
+        </li>
+        <li>
+          MIT License (c) 2015
+        </li>
+      </ul>
+    </footer>
 
-    <div class="col-md-1"></div>
-
-    <div class="col-md-5">
-
-        <label for="spool-selector">Sensor</label>
-        <select class="form-control" id="sensor-selector" name="node_id" tabindex="4" data-parsley-required ></select>
-
-    </div>
-    <div class="col-md-5">
-        <label>&nbsp;</label>
-        <button type="submit" class="btn btn-default btn-primary btn-block"
-                tabindex="5">
-            Download PCAP
-        </button>
-    </div>
-    <div class="col-md-1"></div>
-</div>
-</form>
-</br>
-
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-  <div class="well">
-    Example:
-    <pre>
-http://127.0.0.1:9001/data.pcap?src_addr=1.1.1.1&src_port=111&dst_addr=2.2.2.2&dst_port=222&start_time=2001-01-01 5:01pm&end_time=2001-01-01 5:05pm&api_key=54ba2f56-3a84-4593-fe73-322e3b5ded16&node_id=1
-  </pre>
   </div>
-</div>
-<div class="col-md-1"></div>
-</div>
-
-</br>
-
-<footer class="bs-docs-footer">
-  <div class="container">
-    <div class="bs-docs-social">
-  <ul class="bs-docs-social-buttons">
-    <li>
-      <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=packets-at-rest&amp;repo=packets-at-rest&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
-    </li>
-    <li>
-      <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=packets-at-rest&amp;repo=packets-at-rest&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
-    </li>
-    <li>
-      MIT License (c) 2015
-    </li>
-  </ul>
-</footer>
-
-</div>
 
 
 
@@ -378,13 +367,20 @@ http://127.0.0.1:9001/data.pcap?src_addr=1.1.1.1&src_port=111&dst_addr=2.2.2.2&d
   {{/each}}
 </script>
 
+<script id="collector-template" type="x-handlebars-template">
+  {{#each this}}
+    <option value="{{url}}">{{name}}</option>
+  {{/each}}
+</script>
+
 
 <script src="vendor/jquery.min.js"></script>
 <script src="vendor/bootstrap.min.js"></script>
 <script src="vendor/moment.min.js"></script>
 <script src="vendor/handlebars.min.js"></script>
 <script src="vendor/parsley.min.js"></script>
-<script src="js/sensors.js"></script>
+<script src="js/nodes.js"></script>
+<script src="js/collectors.js"></script>
 <script src="js/main.js"></script>
 
 </body>

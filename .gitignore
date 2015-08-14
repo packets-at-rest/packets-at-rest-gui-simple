@@ -27,3 +27,7 @@ build/Release
 node_modules
 
 bower_components
+
+# Production Settings
+www/js/nodes.js
+www/js/collectors.js

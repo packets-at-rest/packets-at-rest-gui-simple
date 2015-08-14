@@ -47,9 +47,34 @@ $(document).ready(function () {
             $(this).val('Enter API key ..');
         }
     });
-    
+
+
+    $("#collector-selector").change(function () {
+      actionstr = $("#collector-selector :selected").val();
+      $('#par-form').attr("action", actionstr + "/data.pcap");
+    }).change();
+
+    //$("#collector-selector :selected").val();
+    //$('#par-form').attr("action","http://google.com");
+
     var theTemplateScript = $("#sensor-template").html();
     var theTemplate = Handlebars.compile(theTemplateScript);
     $("#sensor-selector").append(theTemplate(sensorData));
+
+    var theTemplateScript = $("#collector-template").html();
+    var theTemplate = Handlebars.compile(theTemplateScript);
+    $("#collector-selector").append(theTemplate(collectorData));
+
+    $('#par-form').attr("action", $("#collector-selector :selected").val() + "/data.pcap");
+
+    //$("#par-form").submit(function() {
+    //  $(this).children('#collector_id').remove();
+    //});
+
+    $('#serialize').click(function () {
+      $('#example-out').text(
+        $("#collector-selector :selected").val() + "/data.pcap?" + $('#par-form').serialize()
+      );
+    });
 
 });
