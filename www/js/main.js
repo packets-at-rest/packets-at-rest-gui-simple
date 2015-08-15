@@ -49,13 +49,7 @@ $(document).ready(function () {
     });
 
 
-    $("#collector-selector").change(function () {
-      actionstr = $("#collector-selector :selected").val();
-      $('#par-form').attr("action", actionstr + "/data.pcap");
-    }).change();
 
-    //$("#collector-selector :selected").val();
-    //$('#par-form').attr("action","http://google.com");
 
     var theTemplateScript = $("#sensor-template").html();
     var theTemplate = Handlebars.compile(theTemplateScript);
@@ -65,16 +59,38 @@ $(document).ready(function () {
     var theTemplate = Handlebars.compile(theTemplateScript);
     $("#collector-selector").append(theTemplate(collectorData));
 
+    // Build the default submit location for the first collector url
     $('#par-form').attr("action", $("#collector-selector :selected").val() + "/data.pcap");
 
-    //$("#par-form").submit(function() {
-    //  $(this).children('#collector_id').remove();
-    //});
+    // When the collector changes rebuild the action for the selected collector url
+    $("#collector-selector").change(function () {
+      actionstr = $("#collector-selector :selected").val();
+      $('#par-form').attr("action", actionstr + "/data.pcap");
+    }).change();
 
+    // Example serialization builder
     $('#serialize').click(function () {
-      $('#example-out').text(
-        $("#collector-selector :selected").val() + "/data.pcap?" + $('#par-form').serialize()
-      );
+
+      if ( $("#par-form").parsley().isValid() ) {
+        $("#serialize").removeClass('btn-danger');
+        $("#serialize").addClass('btn-info');
+        $('#example-out').text(
+          $("#collector-selector :selected").val() + "/data.pcap?" + $("#par-form :input").not("select.exclude").serialize()
+        )
+      } else {
+        $("#serialize").removeClass('btn-info');
+        $("#serialize").addClass('btn-danger');
+        $('#example-out').text('Invalid : ' + $("#collector-selector :selected").val() + "/data.pcap?" + $("#par-form :input").not("select.exclude").serialize())
+      }
     });
+
+    // Dont submit the collector_id
+
+    $("#par-form").submit(function() {
+        $("#par-form :input").not("select.exclude").serialize();
+    });
+
+
+
 
 });

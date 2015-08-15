@@ -30,9 +30,10 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <title>Packets-At-REST-gui-simple</title>
+    <title>Packets At REST gui simple</title>
 
-    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="vendor/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/lavish-bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -45,7 +46,7 @@
             <a style = "padding-left: 15px; padding-top: 7px;" class="navbar-brand" href="https://github.com/packets-at-rest">
               <img alt="Brand" height="35" src="img/github.png">
             </a>
-            <a class="navbar-brand" href="#">Packets-At-REST gui simple</a>
+            <p class="navbar-text">Packets At REST GUI Simple</p>
           </div>
       </div>
   </nav>
@@ -60,7 +61,7 @@
           <div class="col-md-1"></div>
           <div class="col-md-5">
             <label for="collector-selector">Collectors</label>
-            <select class="form-control" id="collector-selector" name="collector_id" tabindex="4" data-parsley-required ></select>
+            <select class="form-control exclude" id="collector-selector" name="collector_id" tabindex="4" data-parsley-required ></select>
           </div>
 
           <div class="col-md-5">
@@ -85,12 +86,7 @@
       <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10">
-
-            <ul class="nav nav-tabs" id="query-tabs">
-                <li class="active"><a href="#pcap-filter-tab"
-                                      query-type="pcap-filter"><img alt="Brand" height="35" src="img/box.png">Packet Filter</a>
-                </li>
-            </ul>
+            <img alt="Brand" height="35" src="img/box.png">Packet Filter
             <div id="query-panel" class="panel panel-default">
                 <div class="panel-body">
                     <div class="tab-content">
@@ -331,8 +327,7 @@
       <div class="col-md-1"></div>
       <div class="col-md-10">
         <div class="well">
-          Example:
-          <input type="button" value="serialize" id="serialize">
+          <button type="button" class="btn btn-info" value="Build Example" id="serialize">Build Example</button><br/><br/>
           <pre id="example-out">http://127.0.0.1:9001/data.pcap?src_addr=1.1.1.1&src_port=111&dst_addr=2.2.2.2&dst_port=222&start_time=2001-01-01 5:01pm&end_time=2001-01-01 5:05pm&api_key=54ba2f56-3a84-4593-fe73-322e3b5ded16&node_id=1</pre>
         </div>
       </div>

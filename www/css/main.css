@@ -57,3 +57,7 @@ li.parsley-required {
   border: 0px solid #EED3D7;
   list-style: none;
 }
+
+.filtertab {
+  background-color: #FFF;
+}
