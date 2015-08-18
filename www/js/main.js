@@ -36,13 +36,13 @@ $(document).ready(function () {
         $("#query-type").val($(this).attr("query-type"));
     });
 
-    $("#api-key").focus( function() {
+    $("#api_key").focus( function() {
     if ( $(this).val()=="Enter API key ..") {
         $(this).val('');
     }
     });
 
-    $("#api-key").blur( function() {
+    $("#api_key").blur( function() {
         if ( $(this).val()=="") {
             $(this).val('Enter API key ..');
         }
@@ -86,8 +86,16 @@ $(document).ready(function () {
 
     // Dont submit the collector_id
 
-    $("#par-form").submit(function() {
-        $("#par-form :input").not("select.exclude").serialize();
+    $("#par-form").submit(function( event ) {
+        event.preventDefault();
+
+        var data = $("#par-form :input").not("select.exclude").serializeArray();
+        var $form = $( this ),
+            url = $form.attr( "action" );
+
+        $.post( url, data );
+        console.log(data);
+
     });
 
 
