@@ -93,7 +93,7 @@ $(document).ready(function () {
         var $form = $( this ),
             url = $form.attr( "action" );
 
-        $.post( url, data );
+        $.get( url, data );
         console.log(data);
 
     });
