@@ -48,9 +48,6 @@ $(document).ready(function () {
         }
     });
 
-
-
-
     var theTemplateScript = $("#sensor-template").html();
     var theTemplate = Handlebars.compile(theTemplateScript);
     $("#sensor-selector").append(theTemplate(sensorData));
@@ -93,12 +90,18 @@ $(document).ready(function () {
         var $form = $( this ),
             url = $form.attr( "action" );
 
-        $.get( url, data );
+        var serial_data = $("#collector-selector :selected").val() + "/data.pcap?" + $("#par-form :input").not("select.exclude").serialize();
+
+        //$.get( url, data );
+
+        var jqxhr = $.get( url, function( data ) {
+          $( "<tr><td>" + serial_data + "</td></tr>" ).appendTo( "tbody#log" );
+        }).fail(function() {
+          $( "<tr class='warning'><td>"+serial_data+"</td></tr>" ).appendTo( "tbody#log" );
+        });
+
         console.log(data);
 
     });
-
-
-
 
 });

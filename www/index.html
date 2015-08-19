@@ -326,7 +326,7 @@
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-10">
-        <div class="well">
+        <div class="well" id="buildexample">
           <button type="button" class="btn btn-info" value="Build Example" id="serialize">Build Example</button><br/><br/>
           <pre id="example-out">http://127.0.0.1:9001/data.pcap?src_addr=1.1.1.1&src_port=111&dst_addr=2.2.2.2&dst_port=222&start_time=2001-01-01 5:01pm&end_time=2001-01-01 5:05pm&api_key=54ba2f56-3a84-4593-fe73-322e3b5ded16&node_id=1</pre>
         </div>
@@ -335,7 +335,33 @@
     </div>
 
     </br>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
 
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Log</div>
+
+          <!-- Table -->
+          <table class="table table-striped table-bordered">
+
+            <thead>
+              <tr><th class="info">Request URL:</th></tr>
+            </thead>
+
+            <tbody id="log">
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+
+
+
+    </br>
     <footer class="bs-docs-footer">
       <div class="container">
         <div class="bs-docs-social">
