@@ -7,19 +7,19 @@ function setElementValue(element, value) {
 
 function setStartTime(unit, value) {
     if (unit === null) {
-        $("input[name='start_time']").val(moment().format())
+        $("input[name='start_time']").val(moment().utc().format())
     }
     else {
-        $("input[name='start_time']").val(moment().subtract(value, unit).format())
+        $("input[name='start_time']").val(moment().utc().subtract(value, unit).format())
     }
 }
 
 function setEndTime(unit, value) {
     if (unit === null) {
-        $("input[name='end_time']").val(moment().format())
+        $("input[name='end_time']").val(moment().utc().format())
     }
     else {
-        $("input[name='end_time']").val(moment().subtract(value, unit).format())
+        $("input[name='end_time']").val(moment().utc().subtract(value, unit).format())
     }
 }
 
@@ -27,8 +27,8 @@ function setEndTime(unit, value) {
 $(document).ready(function () {
 
     // $("#input-timezone-offset").val(moment().format("Z"));
-    $("input[name='start_time']").val(moment().format());
-    $("input[name='end_time']").val(moment().format());
+    $("input[name='start_time']").val(moment().utc().format());
+    $("input[name='end_time']").val(moment().utc().format());
 
     $("#query-tabs a").click(function (e) {
         e.preventDefault();
