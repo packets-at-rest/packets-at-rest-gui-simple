@@ -23,6 +23,44 @@ function setEndTime(unit, value) {
     }
 }
 
+function iFrameLoaded(id, src) {
+    var deferred = $.Deferred(),
+        iframe = $("<iframe class='hiddenFrame'></iframe>").attr({
+            "id": id,
+            "src": src
+        });
+
+    iframe.load(deferred.reject("json loading"));
+    iframe.appendTo("body");
+
+    setTimeout(function() {
+      deferred.resolve("pcap loading");
+    }, 2000);
+
+    // Show a "working..." message every half-second
+    setTimeout(function working() {
+      if ( deferred.state() === "pending" ) {
+        deferred.notify( "working... " );
+        setTimeout( working, 500 );
+      }
+    }, 1 );
+
+    deferred.done(function() {
+        console.log("iframe loaded: " + id);
+    });
+
+    return deferred.promise();
+}
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
 
 $(document).ready(function () {
 
@@ -93,12 +131,37 @@ $(document).ready(function () {
         var serial_data = $("#collector-selector :selected").val() + "/data.pcap?" + $("#par-form :input").not("select.exclude").serialize();
 
         //$.get( url, data );
+        var uuid = guid();
 
-        var jqxhr = $.get( serial_data, function( data ) {
-          $( "<tr><td>" + serial_data + "</td></tr>" ).appendTo( "tbody#log" );
-        }).fail(function() {
-          $( "<tr class='warning'><td>"+serial_data+"</td></tr>" ).appendTo( "tbody#log" );
-        });
+        //var iframe = document.createElement("iframe");
+        //iframe.src = serial_data;
+        //iframe.style.display = "none";
+        //document.body.appendChild(iframe);
+
+        //$.when(iFrameLoaded(uuid, 'http://tempsend.com/0ECDC3BB6E/63E1/OtpKeyProv2.4.zip')).then(function() {
+        //  console.log("Both frame completely loaded");
+        //});
+
+        // Attach a done, fail, and progress handler for the asyncEvent
+        // If it loads JSON thats a failure.. it should load a non-document
+        $.when(iFrameLoaded(uuid, serial_data)).then(
+          function( status ) {
+            console.log(status + " - pcap loaded");
+          },
+          function( status ) {
+            console.log(status + " - iFrame json failure notice loaded");
+          },
+          function( status ) {
+            console.log(status + " - polling");
+          }
+        );
+
+
+        //var jqxhr = $.get( serial_data, function( data ) {
+        //  $( "<tr><td>" + serial_data + "</td></tr>" ).appendTo( "tbody#log" );
+        //}).fail(function() {
+        //  $( "<tr class='warning'><td>"+serial_data+"</td></tr>" ).appendTo( "tbody#log" );
+        //});
 
         console.log(data);
 

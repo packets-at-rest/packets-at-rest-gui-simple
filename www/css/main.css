@@ -65,3 +65,7 @@ li.parsley-required {
 tr.odd {
   background-color: rgb(76, 127, 199);
 }
+
+.hiddenFrame {
+border: 0px none; height: 0px; width: 0px;
+}
