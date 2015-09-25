@@ -30,7 +30,7 @@ function iFrameLoaded(id, src) {
             "src": src
         });
 
-    iframe.load(deferred.reject("json loading"));
+    iframe.load(deferred.resolve("load"));
     iframe.appendTo("body");
 
     setTimeout(function() {
@@ -46,7 +46,7 @@ function iFrameLoaded(id, src) {
     }, 1 );
 
     deferred.done(function() {
-        console.log("iframe loaded: " + id);
+        console.log("iframe loading on promise: " + id);
     });
 
     return deferred.promise();
@@ -158,7 +158,7 @@ $(document).ready(function () {
 
 
         //var jqxhr = $.get( serial_data, function( data ) {
-        //  $( "<tr><td>" + serial_data + "</td></tr>" ).appendTo( "tbody#log" );
+        $( "<tr><td>" + serial_data + "</td></tr>" ).appendTo( "tbody#log" );
         //}).fail(function() {
         //  $( "<tr class='warning'><td>"+serial_data+"</td></tr>" ).appendTo( "tbody#log" );
         //});
