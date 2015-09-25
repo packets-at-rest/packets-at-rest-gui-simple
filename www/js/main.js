@@ -94,7 +94,7 @@ $(document).ready(function () {
 
         //$.get( url, data );
 
-        var jqxhr = $.get( url, function( data ) {
+        var jqxhr = $.get( serial_data, function( data ) {
           $( "<tr><td>" + serial_data + "</td></tr>" ).appendTo( "tbody#log" );
         }).fail(function() {
           $( "<tr class='warning'><td>"+serial_data+"</td></tr>" ).appendTo( "tbody#log" );
