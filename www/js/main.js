@@ -7,19 +7,19 @@ function setElementValue(element, value) {
 
 function setStartTime(unit, value) {
     if (unit === null) {
-        $("input[name='start_time']").val(moment().utc().format())
+        $("input[name='start_time']").val(moment().utc().format('YYYY-MM-DD h:mm a')) //2001-01-01 5:05pm
     }
     else {
-        $("input[name='start_time']").val(moment().utc().subtract(value, unit).format())
+        $("input[name='start_time']").val(moment().utc().subtract(value, unit).format('YYYY-MM-DD h:mm a'))
     }
 }
 
 function setEndTime(unit, value) {
     if (unit === null) {
-        $("input[name='end_time']").val(moment().utc().format())
+        $("input[name='end_time']").val(moment().utc().format('YYYY-MM-DD h:mm a'))
     }
     else {
-        $("input[name='end_time']").val(moment().utc().subtract(value, unit).format())
+        $("input[name='end_time']").val(moment().utc().subtract(value, unit).format('YYYY-MM-DD h:mm a'))
     }
 }
 
@@ -27,8 +27,8 @@ function setEndTime(unit, value) {
 $(document).ready(function () {
 
     // $("#input-timezone-offset").val(moment().format("Z"));
-    $("input[name='start_time']").val(moment().utc().format());
-    $("input[name='end_time']").val(moment().utc().format());
+    $("input[name='start_time']").val(moment().subtract(1,  'minutes').utc().format('YYYY-MM-DD h:mm a'));
+    $("input[name='end_time']").val(moment().utc().format('YYYY-MM-DD h:mm a'));
 
     $("#query-tabs a").click(function (e) {
         e.preventDefault();

@@ -94,7 +94,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="start_time">Start time: (utc)</label>
+                                    <label for="start_time">Start time: (utc) [2001-01-01 5:05pm]</label>
 
                                     <div class="input-group">
                                         <input id="start_time" type="text"
@@ -148,7 +148,7 @@
                                         </div>
                                     </div>
                                   -->
-                                  <label for="end_time">End time: (utc)</label>
+                                  <label for="end_time">End time: (utc) [2001-01-01 5:05pm]</label>
 
                                   <div class="input-group">
                                       <input id="end_time" type="text"
@@ -185,7 +185,7 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <label for="src_addr">Source IP:</label>
+                                    <label for="src_addr">Source IP: (ipv4)</label>
 
                                     <div class="input-group">
                                         <input id="src_addr" type="text"
@@ -193,12 +193,14 @@
                                                class="form-control"
                                                tabindex="4"
                                                value=""
+                                               data-parsley-trigger="change"
+                                               data-parsley-pattern="^\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b$"
                                                data-parsley-required  />
                                     </div>
                                 </div><!-- //col src_addr -->
 
                                 <div class="col-md-6">
-                                    <label for="dst_addr">Destination IP:</label>
+                                    <label for="dst_addr">Destination IP: (ipv4)</label>
 
                                     <div class="input-group">
                                         <input id="dst_addr" type="text"
@@ -206,6 +208,8 @@
                                                class="form-control"
                                                tabindex="5"
                                                value=""
+                                               data-parsley-trigger="change"
+                                               data-parsley-pattern="^\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b$"
                                                data-parsley-required/>
                                     </div>
                                 </div><!-- //col dst_addr -->
@@ -218,7 +222,7 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <label for="src_port">Source Port:</label>
+                                    <label for="src_port">Source Port: [0 - 65535]</label>
 
                                     <div class="input-group">
                                         <input id="src_port" type="text"
@@ -227,7 +231,9 @@
                                                tabindex="6"
                                                value=""
                                                data-parsley-trigger="change"
-                                               data-parsley-type="integer"
+
+                                               data-parsley-range="[0,65535]"
+                                               data-parsley-type="digits"
                                                data-parsley-required />
 
                                         <div class="input-group-btn">
@@ -253,7 +259,7 @@
                                 </div><!-- //col src_port -->
 
                                 <div class="col-md-6">
-                                    <label for="dst_port">Destination Port:</label>
+                                    <label for="dst_port">Destination Port: [0 - 65535]</label>
 
                                     <div class="input-group">
                                         <input id="dst_port" type="text"
@@ -262,7 +268,8 @@
                                                tabindex="7"
                                                value=""
                                                data-parsley-trigger="change"
-                                               data-parsley-type="integer"
+                                               data-parsley-range="[0,65535]"
+                                               data-parsley-type="digits"
                                                data-parsley-required />
 
                                         <div class="input-group-btn">
