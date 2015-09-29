@@ -15,9 +15,21 @@ rest-assured
 
 This should load the sqlite3 `rest-assured.db`.
 
+## Managing New Contracts
+
 Then use the Collector `rest-assured` in the gui to make requests.
 
-You can view the contract server on http://localhost:4578
+You can view the contract server on (http://localhost:4578)
+
+Ensure that new request are set as the appropriate `Content-Type` in the db
+
+```
+---
+Content-Type: application/json
+```
+
+You can use SQLiteStudio (http://sqlitestudio.pl/) or any sqlite3 application to ensure the row contains the proper content-type.
+
 
 ### Form Filler
 
