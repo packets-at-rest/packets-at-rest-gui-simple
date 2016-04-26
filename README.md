@@ -70,5 +70,17 @@ $> cd packets-at-rest-gui-simple
 $> bower-pull.sh
 ```
 
+# Modify the www/js directory
+
+Add the collectors, and the nodes configuration for your environment.
+
+$> cp www/js/collectors.js-sample www/js/collectors.js
+$> cp www/js/nodes.js-sample www/js/nodes.js
+
+# Run the sample `rackup` file for a simple server
+
+You can use any rack based server puma/webbrick/thin etc.
+
+$> puma
 
 $$ Profit $$
